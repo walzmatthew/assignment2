@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <title>Walzma's Assignment 2 View Page</title>
+</head>
+<body>
+  <h1>View Entry Page</h1>
+  <fieldset>
+  <p>Entry's Name: {{name}}</p>
+  <p>Entry's Favorite Color: {{color}}</p>
+  <p>Entry's Favorite Types of Cuisine:
+  <ul>
+  {% for i in cuisines %}
+  {% if i.picked == 'True' %}
+  <li>{{ i.name }}</li>
+  {% endif %}
+  {% endfor %}
+  </ul>
+  <p>Entry's Number of Siblings: {{ num_sibs }}
+  </fieldset>
+  <section>
+  <a href="..">Back to Home</a>
+  </section>
+</body>
+</html>  

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <title>Walzma's Assignment 2 Edit Page</title>
+</head>
+<body>
+  <h1>Edit Entry Page</h1>
+  <fieldset>
+  <form action="/edit" method="post">
+    <fieldset>
+	  <input type="hidden" name="action" value="edit_entry"/>
+	  <input type="hidden" name="key" value="{{ key }}"/>
+	  <legend>Name</legend>
+	  <input required type="text" name="username" value="{{ name }}" oninvalid="this.setCustomValidity('You must enter a name.')" oninput="setCustomValidity('')"/>
+	</fieldset>
+	<br>
+	<fieldset>
+	  <legend>Favorite Color</legend>
+	  {% for x in colors %}
+	  {% if x.name == fav_color %}
+	  <input type="radio" name="color" value="{{ x.name }}" checked="checked" /> {{ x.name }}
+	  {% else %}
+	  <input type="radio" name="color" value="{{ x.name }}" /> {{ x.name }}
+	  {% endif %}
+	  {% endfor %}
+	</fieldset>
+	<fieldset>
+	  <legend>Favorite Cuisine(s)</legend>
+	  {% for x in cuisines %}
+	  {% if x.picked == 'True' %}
+	  <input type="checkbox" name="cuisine" value="{{ x.name }}" checked="checked"/> {{ x.name }}
+	  {% else %}
+	  <input type="checkbox" name="cuisine" value="{{ x.name }}" /> {{ x.name }}
+	  {% endif %}
+	  {% endfor %}
+	</fieldset>
+	<fieldset>
+	  <legend>Number of Siblings</legend>
+	  <input type="number" name="num_sibs" min="0" value="{{ num_sibs }}" required oninvalid="this.setCustomValidity('You must enter a positive number of siblings.')" oninput="setCustomValidity('')" />
+	</fieldset>
+	<br>
+	<input type="submit" value="Edit Entry"/>
+	<a href="..">Cancel / Back to Home</a>
+  </form>
+  </fieldset>
+  {% if message %}
+  <section>
+    <fieldset>
+	<legend>{{ message_title }}</legend>
+	<p> {{ message }}
+    </fieldset>
+  </section>
+  {% endif %}
+  </fieldset>
+<!--  <section>
+  <br>
+  <a href="..">Cancel / Back to Home</a>
+  </section>  -->
+  </fieldset>
+</body>
+</html>  

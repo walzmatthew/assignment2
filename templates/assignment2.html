@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <title>Walzma's Assignment 2</title>
+</head>
+<body>
+  <h1>Walzma's Assignment 2</h1>
+  <fieldset>
+  <form action="/" method="post">
+    <fieldset>
+	  <input type="hidden" name="action" value="new_entry"/>
+	  <legend>Name</legend>
+	  <input required type="text" name="username" placeholder="Mickey Mouse" oninvalid="this.setCustomValidity('You must enter a name.')" oninput="setCustomValidity('')"/>
+	</fieldset>
+	<fieldset>
+	  <legend>Favorite Color</legend>
+	  {% for x in colors %}
+	  {% if x.name == 'Red' %}
+	  <input type="radio" name="color" value="{{ x.name }}" checked="checked" /> {{ x.name }}
+	  {% else %}
+	  <input type="radio" name="color" value="{{ x.name }}" /> {{ x.name }}
+	  {% endif %}
+	  {% endfor %}
+	</fieldset>
+	<fieldset>
+	  <legend>Favorite Cuisine(s)</legend>
+	  {% for x in cuisines %}
+	  <input type="checkbox" name="cuisine" value="{{ x.name }}" /> {{ x.name }}
+	  {% endfor %}
+	</fieldset>
+	<fieldset>
+	  <legend>Number of Siblings</legend>
+	  <input type="number" name="num_sibs" min="0" value="0" required oninvalid="this.setCustomValidity('You must enter a positive number of siblings.')" oninput="setCustomValidity('')" />
+	</fieldset>
+	<br />
+	<input type="submit" value="Submit"/>
+  </form>
+  </fieldset>
+  {% if message %}
+  <section>
+    <fieldset>
+	<legend>{{ message_title }}</legend>
+	<p> {{ message }}
+    </fieldset>
+  </section>
+  {% endif %}  
+  {% if entries|length > 0 %}
+  <br />
+  <section>
+    <fieldset>
+	<legend>View / Edit Entries</legend>
+	  {% for entry in entries %}
+	    <p>{{ entry.name }} (<a href='/view?key={{ entry.key }}&type=entry'>View</a>) (<a href='/edit?key={{ entry.key }}&type=entry'>Edit</a>)</p>
+	  {% endfor %}
+    </fieldset>
+  </section>
+  {% endif %} 
+</body>
+</html>  
